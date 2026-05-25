@@ -1,15 +1,15 @@
-# Stage 0, "build-stage", based on Bun, to build and compile the frontend
-FROM oven/bun:1 AS build-stage
+# Stage 0, "build-stage", based on npm, to build and compile the frontend
+FROM oven/npm:1 AS build-stage
 
 WORKDIR /app
 
-COPY package.json bun.lock /app/
+COPY package.json npm.lock /app/
 
 COPY frontend/package.json /app/frontend/
 
 WORKDIR /app/frontend
 
-RUN bun install
+RUN npm install
 
 COPY ./frontend /app/frontend
 ARG VITE_API_URL
